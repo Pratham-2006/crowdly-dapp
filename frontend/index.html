@@ -4,7 +4,38 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>Crowdly - Decentralized Crowdfunding</title>
+    <script>
+      if (window.location.search.includes('mock=1')) {
+        const RPC = 'https://ethereum-sepolia-rpc.publicnode.com';
+        const ACCT = '0x2346E845e4537D2D3E78FB70F49d66D9d07e9c96';
+        let idCounter = 1;
+        window.ethereum = {
+          isMetaMask: true,
+          on: () => {},
+          removeListener: () => {},
+          request: async ({ method, params }) => {
+            if (method === 'eth_requestAccounts' || method === 'eth_accounts') return [ACCT];
+            if (method === 'eth_chainId') return '0xaa36a7';
+            if (method === 'net_version') return '11155111';
+            const res = await fetch(RPC, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ jsonrpc: '2.0', id: idCounter++, method, params })
+            });
+            const data = await res.json();
+            return data.result;
+          }
+        };
+        window.addEventListener('DOMContentLoaded', () => {
+          setTimeout(() => {
+            const btns = Array.from(document.querySelectorAll('button'));
+            const btn = btns.find(b => b.textContent.includes('Connect wallet'));
+            if (btn) btn.click();
+          }, 500);
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

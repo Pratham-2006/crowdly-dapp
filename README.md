@@ -68,4 +68,8 @@ Never commit `.env`. Use a dedicated wallet that only holds test ETH.
 
 ## Screenshots
 
-Add your screenshots here.
+### 1. Landing Page (Connect Wallet)
+![Crowdly Landing Page](screenshots/landing-page.png)
+
+### 2. Connected dApp Dashboard & Active Campaigns
+![Crowdly Dashboard](screenshots/dashboard.png)
