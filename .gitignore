@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Hardhat build artifacts
+artifacts/
+cache/
+contracts-app/artifacts/
+contracts-app/cache/
+typechain/
+typechain-types/
+
+# Frontend build
+dist/
+dist-ssr/
+frontend/dist/
+
+# Logs & Editor
+logs/
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
